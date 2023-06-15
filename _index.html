@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Informações:</h1>
+    <p>A cada 1y, temos 0,085m</p>
+    <p>O personagem tem <span id="altura-personagem">1,70</span> metros, ou seja ele tem <span id="altura-y">20</span>y.</p>
+    <p>A tela tem 150y, totalizando 12,75m.</p>
+    <h2>Escolha Uma Das Opções antes de jogar!</h2>
+    <div>
+        <input type="radio" name="grav" value="terra"/> Terra<br/>
+        <input type="radio" name="grav" value="lua"/> Lua<br/>
+        <input type="radio" name="grav" value="marte"/> Marte<br/>
+        <input type="radio" name="grav" value="urano"/> Urano<br/>
+    </div>
+    <canvas id="myCanvas"></canvas>
+    <canvas id="Bola"></canvas>
+    <script type="module"  src="script-principal.js" ></script>
+    <script type="module" src="Bola.js"></script>
+</body>
+</html>
