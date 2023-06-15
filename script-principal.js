@@ -6,8 +6,14 @@ let Yy = Math.round(altura / 0.085);
 document.getElementById("altura-personagem").textContent = altura.toFixed(2);
 document.getElementById("altura-y").textContent = Yy;
 
+//Variaveis de gravidade:
 var escalaGravidade = 0.01;
-let gravidade; // Variável para armazenar a gravidade
+let gravidade; 
+const gravidadeTerra = 9.8;
+const gravidadeLua = 1.6;
+const gravidadeMarte = 3.7;
+const gravidadeMercurio = 3.7;
+const gravidadeVenus = 8.8
 
 function DefineGravidade() {
   var opcao = document.querySelector('input[name=grav]:checked');
@@ -19,16 +25,19 @@ function DefineGravidade() {
   switch (opcao.value) {
     case 'terra':
       console.log(gravidade)
-      return 9.8;
+      return gravidade = gravidadeTerra; 
     case 'lua':
       console.log(gravidade)
-      return 1.6;
+      return gravidade = gravidadeLua;
     case 'marte':
       console.log(gravidade)
-      return 3.7;
-    case 'urano':
+      return gravidade = gravidadeMarte;
+    case 'mercurio':
       console.log(gravidade)
-      return 8.8;
+      return gravidade = gravidadeMercurio;
+    case 'venus':
+      console.log(gravidade)
+      return gravidade = gravidadeVenus;
     default:
       console.log('Opção de gravidade inválida');
       return;
@@ -98,22 +107,46 @@ const botoes = {
   }
 }
 
-function animacao(){
+function animacao() {
   requestAnimationFrame(animacao);
   jogador.update();
 
-  if(botoes.direita.pressed) {
-    jogador.velocidade.x = 2
-  } else if (botoes.esquerda.pressed){
-    jogador.velocidade.x = -2
+  if (!jogador.pulando) {
+    if (botoes.direita.pressed) {
+      if (gravidade === gravidadeTerra) {
+        jogador.velocidade.x = 2;
+      } else if (gravidade === gravidadeLua) {
+        jogador.velocidade.x = 1;
+      } else if (gravidade === gravidadeMercurio) {
+        jogador.velocidade.x = 1.3;
+      } else if (gravidade === gravidadeMarte) {
+        jogador.velocidade.x = 1.3;
+      } else if (gravidade === gravidadeVenus) {
+        jogador.velocidade.x = 1.9;
+      }
+    } else if (botoes.esquerda.pressed) {
+      if (gravidade === gravidadeTerra) {
+        jogador.velocidade.x = -2;
+      } else if (gravidade === gravidadeLua) {
+        jogador.velocidade.x = -1;
+      } else if (gravidade === gravidadeMercurio) {
+        jogador.velocidade.x = -1.3;
+      } else if (gravidade === gravidadeMarte) {
+        jogador.velocidade.x = -1.3;
+      } else if (gravidade === gravidadeVenus) {
+        jogador.velocidade.x = -1.9;
+      }
+    } else {
+      jogador.velocidade.x = 0;
+    }
   }
-  else jogador.velocidade.x = 0
+
   if (puloTempoAtual > 0) {
-  jogador.velocidade.y = puloVelocidadeInicial * (puloTempoAtual / puloTempoTotal);
-  puloTempoAtual--;
-} else if (jogador.pulando) {
-  jogador.velocidade.y += gravidade * escalaGravidade;
-}
+    jogador.velocidade.y = puloVelocidadeInicial * (puloTempoAtual / puloTempoTotal);
+    puloTempoAtual--;
+  } else if (jogador.pulando) {
+    jogador.velocidade.y += gravidade * escalaGravidade;
+  }
 }
 
 animacao();
